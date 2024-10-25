@@ -1,0 +1,32 @@
+pluginManagement {
+    repositories {
+        maven {
+            name = "Fabric"
+            url = "https://maven.fabricmc.net/"
+        }
+        maven {
+            name = "Cotton"
+            url = "https://server.bbkr.space/artifactory/libs-release/"
+        }
+        maven {
+            name = "Quilt"
+            url = "https://maven.quiltmc.org/repository/release"
+        }
+        maven { url "https://maven.architectury.dev/" }
+        maven { url "https://maven.minecraftforge.net/" }
+        maven { url "https://maven.neoforged.net/" }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = "MinecraftOpenXR"
+
+//include("mcxr-core")
+//include("mcxr-play")
+include 'fabric'
+include 'neoforge'
+include 'common'
+include 'openxr'
+include 'forge'
+

@@ -1,0 +1,102 @@
+plugins {
+    id "architectury-plugin" version "3.4-SNAPSHOT"
+    id "dev.architectury.loom" version "1.7-SNAPSHOT" apply false
+    id 'io.github.juuxel.loom-quiltflower' version '1.8.0' apply false
+}
+
+architectury {
+    minecraft = rootProject.minecraft_version
+}
+
+subprojects {
+    if (project.name != "openxr") {
+        apply plugin: "java"
+        apply plugin: "dev.architectury.loom"
+        apply plugin: "io.github.juuxel.loom-quiltflower"
+
+        archivesBaseName = rootProject.archives_base_name
+        version = rootProject.minecraft_version + "-" + rootProject.mod_version
+        group = rootProject.maven_group
+
+        loom {
+            silentMojangMappingsLicense()
+        }
+
+        dependencies {
+            implementation("org.lwjgl:lwjgl:${rootProject.openxr_version}")
+            implementation("org.lwjgl:lwjgl-glfw:${rootProject.openxr_version}")
+
+            minecraft("com.mojang:minecraft:${rootProject.minecraft_version}") {
+                exclude group: "org.lwjgl", module: "lwjgl"
+                exclude group: "org.lwjgl", module: "lwjgl-glfw"
+            }
+
+            mappings loom.layered {
+                mappings "org.quiltmc:quilt-mappings:${rootProject.minecraft_version}+build.${rootProject.quilt_mappings_version}:intermediary-v2"
+                officialMojangMappings()
+            }
+        }
+
+        tasks.withType(JavaCompile) {
+            options.encoding = "UTF-8"
+            options.release = 21
+        }
+
+        java {
+            withSourcesJar()
+        }
+
+        task copyJarToMain(type: Copy) {
+            duplicatesStrategy = "include"
+            if (project.name != "common") {
+                from remapJar
+                into "../build/libs"
+            }
+        }
+
+        remapJar {
+            // after remap, copy the final jsr to the main /build/libs folder
+            finalizedBy copyJarToMain
+        }
+    }
+}
+
+allprojects {
+    if (project.name != "openxr") {
+        apply plugin: "architectury-plugin"
+        apply plugin: "maven-publish"
+
+        repositories {
+            exclusiveContent {
+                forRepository {
+                    mavenCentral()
+                }
+                filter {
+                    includeGroup "org.lwjgl"
+                }
+            }
+            exclusiveContent {
+                forRepository {
+                    maven {
+                        name = "fabricmc"
+                        url = "https://maven.fabricmc.net/"
+                    }
+                }
+                filter {
+                    includeGroup "net.fabricmc"
+                    includeGroup "fabric-loom"
+                }
+            }
+
+            maven {
+                name = "quilt"
+                url = "https://maven.quiltmc.org/repository/release/"
+            }
+
+            maven {
+                name = "neoforge"
+                url = "https://maven.neoforged.net/releases/"
+            }
+        }
+    }
+}

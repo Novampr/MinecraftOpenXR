@@ -1,0 +1,37 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT"
+issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/"
+
+[[mods]]
+modId="mcoxr"
+version="${mod_version}"
+displayName="MCOpenXR"
+displayURL="https://change.me.to.your.mods.homepage.example.invalid/"
+logoFile="assets/mcoxr/icon.png"
+authors="Sorenon (Original Author) and Nova"
+description='''VR!'''
+
+[[mixins]]
+config="mcoxr.mixins.json"
+
+[[dependencies.mcoxr]]
+modId="neoforge"
+type="required"
+versionRange="[${neoforge_version},)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.mcoxr]]
+modId="minecraft"
+type="required"
+versionRange="[1.21, 1.21.1]"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.mcoxr]]
+modId="fabric_api"
+type="required"
+versionRange="[1.21, 1.21.1]"
+ordering="NONE"
+side="BOTH"

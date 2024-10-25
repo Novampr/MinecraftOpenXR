@@ -1,0 +1,51 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "net.sorenon.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"EntityMixin",
+		"LivingEntityAcc",
+		"PlayerEntityMixin",
+		"ServerLoginNetworkHandlerAcc",
+		"hands.EntityMixin",
+		"hands.LivingEntityMixin",
+		"hands.ServerPlayerGameModeMixin"
+	],
+	"client": [
+		"ChatScreenMixin",
+		"EditBoxMixin",
+		"GLXMixin",
+		"KeyboardInputMixin",
+		"MultiPlayerScreenMixin",
+		"PauseScreenMixin",
+		"SystemDetailsMixin",
+		"TitleScreenMixin",
+		"TutorialToastMixin",
+		"accessor.CameraAcc",
+		"accessor.MouseHandlerAcc",
+		"accessor.RenderTargetAcc",
+		"accessor.WindowAcc",
+		"gui.InputConstantsMixin",
+		"gui.MinecraftMixin",
+		"gui.ScreenMixin",
+		"hands.FireworkRocketEntityMixin",
+		"hands.GameRendererMixin",
+		"hands.LivingEntityMixin",
+		"hands.PlayerMixin",
+		"hands.ThrownItemRendererMixin",
+		"hands.client.MultiPlayerGameModeMixin",
+		"rendering.GameRendererMixin",
+		"rendering.GuiMixin",
+		"rendering.LevelRendererMixin",
+		"rendering.Matrix4fMixin",
+		"rendering.MinecraftMixin",
+		"rendering.WindowMixin",
+		"resources.GameRendererMixin",
+		"resources.ResourceManagerReloadListenerMixin",
+		"roomscale.ClientPlayerEntityMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

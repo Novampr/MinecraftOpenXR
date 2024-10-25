@@ -1,0 +1,34 @@
+{
+	"schemaVersion": 1,
+	"id": "mcoxr",
+	"version": "${mod_version}",
+	"name": "MCOpenXR",
+	"description": "VR!",
+	"authors": [
+		"Sorenon (Original Author)",
+		"Nova"
+	],
+	"contact": {
+		"homepage": "https://github.com/Novampr/MinecraftOpenXR",
+		"sources": "https://github.com/Novampr/MinecraftOpenXR",
+		"issues": "https://github.com/Novampr/MinecraftOpenXR/issues"
+	},
+	"license": "MIT",
+	"icon": "assets/mcoxr/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"net.kore.mcoxr.MCOpenXRFabric"
+		]
+	},
+	"mixins": [
+		"mcoxr.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"fabric": "*",
+		"minecraft": "1.21.*",
+		"java": ">=21"
+	},
+	"accessWidener": "mcoxr.accesswidener"
+}

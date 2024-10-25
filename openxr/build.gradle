@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+group = 'net.kore.mcoxr'
+version = 'version'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly("org.lwjgl:lwjgl:${rootProject.openxr_version}")
+    compileOnly("org.lwjgl:lwjgl-glfw:${rootProject.openxr_version}")
+    implementation("org.lwjgl:lwjgl-openxr:${rootProject.openxr_version}")
+}
