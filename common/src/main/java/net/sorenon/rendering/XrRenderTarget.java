@@ -50,24 +50,26 @@ public class XrRenderTarget extends RenderTarget {
             if (this.useDepth) {
                 this.depthBufferId = TextureUtil.generateTextureId();
                 GlStateManager._bindTexture(this.depthBufferId);
-                GlStateManager._texParameter(3553, 10241, 9728);
-                GlStateManager._texParameter(3553, 10240, 9728);
-                GlStateManager._texParameter(3553, 34892, 0);
-                GlStateManager._texParameter(3553, 10242, 33071);
-                GlStateManager._texParameter(3553, 10243, 33071);
-                GlStateManager._texImage2D(3553, 0, 6402, this.width, this.height, 0, 6402, 5126, null);
+                GlStateManager._texParameter(GL30.GL_TEXTURE_2D, 10241, 9728);
+                GlStateManager._texParameter(GL30.GL_TEXTURE_2D, 10240, 9728);
+                GlStateManager._texParameter(GL30.GL_TEXTURE_2D, 34892, 0);
+                GlStateManager._texParameter(GL30.GL_TEXTURE_2D, 10242, 33071);
+                GlStateManager._texParameter(GL30.GL_TEXTURE_2D, 10243, 33071);
+                GlStateManager._texImage2D(GL30.GL_TEXTURE_2D, 0, 6402, this.width, this.height, 0, 6402, 5126, null);
             }
 
             ((RenderTargetAcc) this).setFilterMode(9728, true);
             GlStateManager._bindTexture(this.colorTextureId);
-            GlStateManager._texParameter(3553, 10242, 33071);
-            GlStateManager._texParameter(3553, 10243, 33071);
-            GlStateManager._texImage2D(3553, 0, 32856, this.width, this.height, 0, 6408, 5121, null);
-            GlStateManager._glFramebufferTexture2D(36160, 36064, 3553, this.colorTextureId, index);
+            GlStateManager._texParameter(GL30.GL_TEXTURE_2D, 10242, 33071);
+            GlStateManager._texParameter(GL30.GL_TEXTURE_2D, 10243, 33071);
+            GlStateManager._texImage2D(GL30.GL_TEXTURE_2D, 0, 32856, this.width, this.height, 0, 6408, 5121, null);
+
+            GlStateManager._glBindFramebuffer(GL30.GL_FRAMEBUFFER, this.frameBufferId);
+
+            GlStateManager._glFramebufferTexture2D(GL30.GL_FRAMEBUFFER, GL30.GL_COLOR_ATTACHMENT0, GL30.GL_TEXTURE_2D, this.colorTextureId, index);
             if (this.useDepth) {
-                GlStateManager._glFramebufferTexture2D(36160, 36096, 3553, this.depthBufferId, index);
+                GlStateManager._glFramebufferTexture2D(GL30.GL_FRAMEBUFFER, GL30.GL_DEPTH_ATTACHMENT, GL30.GL_TEXTURE_2D, this.depthBufferId, index);
             }
-            GlStateManager._glBindFramebuffer(36160, this.frameBufferId);
 
             this.checkStatus();
             this.clear(getError);
